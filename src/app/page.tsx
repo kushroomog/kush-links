@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Card, ReleaseCard, SocialLink, DiscIcon, LinkIcon } from "@/components";
+import { Card, FeaturedReleaseCard, ReleaseListItem, SocialLink, DiscIcon, LinkIcon } from "@/components";
 import { socials, releases as releaseConfigs } from "@/data/links";
 import { fetchAllReleases } from "@/lib/spotify";
 
@@ -25,15 +25,11 @@ export default async function Home() {
           <p className="text-zinc-400 text-sm">Acompanhe os principais lançamentos da Kushroom</p>
         </header>
 
-        {/* Releases Card */}
+        {/* Featured Release */}
         {releases.length > 0 && (
           <div className="mb-6">
-            <Card title="Lançamentos" icon={<DiscIcon className="w-4 h-4" />}>
-              <div className="space-y-3">
-                {releases.map((release, index) => (
-                  <ReleaseCard key={index} release={release} />
-                ))}
-              </div>
+            <Card title="Release em Destaque" icon={<DiscIcon className="w-4 h-4" />}>
+              <FeaturedReleaseCard release={releases[0]} />
             </Card>
           </div>
         )}
@@ -48,6 +44,19 @@ export default async function Home() {
             </div>
           </Card>
         </div>
+
+        {/* Other Releases */}
+        {releases.length > 1 && (
+          <div className="mb-6">
+            <Card title="Outros Lançamentos" icon={<DiscIcon className="w-4 h-4" />}>
+              <div className="space-y-2">
+                {releases.slice(1).map((release, index) => (
+                  <ReleaseListItem key={index} release={release} />
+                ))}
+              </div>
+            </Card>
+          </div>
+        )}
 
         {/* Footer */}
         <footer className="text-center py-8 text-zinc-500 text-xs">
