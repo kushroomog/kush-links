@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "kushroom.wav",
   description: "Acompanhe os principais lançamentos da Kushroom",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
