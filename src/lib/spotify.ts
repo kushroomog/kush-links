@@ -43,6 +43,7 @@ export async function fetchRelease(config: ReleaseConfig): Promise<Release | nul
       spotifyUrl: config.spotifyUrl,
       hyperfollow: config.hyperfollow || config.spotifyUrl,
       type: config.type || autoType,
+      year: config.year,
     };
   } catch (error) {
     console.error('Failed to fetch Spotify oEmbed:', error);

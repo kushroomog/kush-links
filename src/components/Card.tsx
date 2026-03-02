@@ -4,16 +4,24 @@ interface CardProps {
   title: string;
   icon: ReactNode;
   children: ReactNode;
+  className?: string;
 }
 
-export function Card({ title, icon, children }: CardProps) {
+export function Card({ title, icon, children, className = "" }: CardProps) {
   return (
-    <section className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 animate-fade-in-up relative overflow-hidden before:absolute before:top-0 before:left-0 before:right-0 before:h-1 before:bg-gradient-to-r before:from-emerald-500 before:to-orange-500">
-      <h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-4 flex items-center gap-2">
-        <span className="text-orange-500">{icon}</span>
+    <section className={`glass-card rounded-2xl p-6 relative overflow-hidden group/card ${className}`}>
+      {/* Accent Top Border */}
+      <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-emerald-500/50 via-orange-500/50 to-emerald-500/50 opacity-50" />
+      
+      <h2 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-6 flex items-center gap-2">
+        <span className="text-orange-500/80 group-hover/card:scale-110 transition-transform duration-300">
+          {icon}
+        </span>
         {title}
       </h2>
-      {children}
+      <div className="relative z-10">
+        {children}
+      </div>
     </section>
   );
 }
