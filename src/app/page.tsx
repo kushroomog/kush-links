@@ -30,7 +30,7 @@ export default async function Home() {
               />
             </div>
           </div>
-          <h1 className="text-4xl font-black text-white mb-3 tracking-tighter uppercase italic">kushroom.links</h1>
+          <h1 className="text-4xl font-black text-white mb-3 tracking-tighter uppercase italic">kushroom.wav</h1>
           <div className="space-y-1 mb-6">
             <p className="text-emerald-500 text-xs font-bold uppercase tracking-[0.2em]">Gravadora Independente de Música Urbana</p>
             <p className="text-zinc-500 text-[10px] font-medium uppercase tracking-[0.1em]">São Paulo, Brasil</p>
