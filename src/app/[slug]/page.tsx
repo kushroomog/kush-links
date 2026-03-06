@@ -3,9 +3,19 @@ import { notFound } from "next/navigation";
 import { Card, FeaturedReleaseCard, ReleaseListItem, SocialLink, DiscIcon, LinkIcon, Waves } from "@/components";
 import { artists } from "@/data/links";
 import { fetchAllReleases } from "@/lib/spotify";
+import { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const artist = artists.find((a) => a.id === slug);
+  
+  return {
+    title: artist ? `${artist.name} | kushroom.links` : "kushroom.links",
+  };
 }
 
 export async function generateStaticParams() {
