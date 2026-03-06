@@ -112,6 +112,14 @@ export function CassetteIcon({ className }: IconProps) {
   );
 }
 
+export function ThreadsIcon({ className }: IconProps) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 24c-6.627 0-12-5.373-12-12s5.373-12 12-12 12 5.373 12 12-5.373 12-12 12zm0-2c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10zm0-16.5c1.474 0 2.76.678 3.593 1.734.201.258.151.632-.111.828-.262.195-.635.143-.829-.123-.591-.806-1.531-1.319-2.583-1.319-1.782 0-3.235 1.453-3.235 3.235v.068c0 1.255.602 2.372 1.533 3.069.171.127.355.234.551.32.181.079.317.262.317.47v.883c0 .138-.056.27-.156.368l-1.071 1.05c-.21.206-.547.206-.757 0l-1.071-1.05c-.099-.098-.156-.231-.156-.368v-.647c-1.393-.951-2.3-2.541-2.3-4.343v-.068c0-3.111 2.529-5.64 5.64-5.64zm0 6.64c.915 0 1.658-.743 1.658-1.658s-.743-1.658-1.658-1.658-1.658.743-1.658 1.658.743 1.658 1.658 1.658z" />
+    </svg>
+  );
+}
+
 export const iconMap: Record<string, React.FC<IconProps>> = {
   instagram: InstagramIcon,
   youtube: YouTubeIcon,
@@ -119,4 +127,5 @@ export const iconMap: Record<string, React.FC<IconProps>> = {
   kwai: KwaiIcon,
   globe: GlobeIcon,
   newspaper: NewspaperIcon,
+  threads: ThreadsIcon,
 };

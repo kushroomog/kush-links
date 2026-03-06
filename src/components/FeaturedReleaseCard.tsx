@@ -21,12 +21,21 @@ export function FeaturedReleaseCard({ release }: FeaturedReleaseCardProps) {
           </span>
         </div>
         
-        {release.cover ? (
+        {release.videoUrl ? (
+          <video
+            src={release.videoUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+        ) : release.cover ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={release.cover}
             alt={release.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[10%] group-hover:grayscale-0"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
         ) : (
           <MusicIcon className="w-16 h-16 text-emerald-500" />

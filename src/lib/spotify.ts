@@ -7,6 +7,24 @@ interface SpotifyOEmbed {
 }
 
 export async function fetchRelease(config: ReleaseConfig): Promise<Release | null> {
+  if (!config.spotifyUrl && config.youtubeUrl) {
+    // Basic YouTube release support (no oEmbed fetching for simplicity, or add it later)
+    return {
+        title: config.type || "Release",
+        artists: [],
+        cover: "/kush-logo.jpeg",
+        spotifyUrl: "",
+        youtubeUrl: config.youtubeUrl,
+        hyperfollow: config.youtubeUrl || "",
+        type: config.type || "Video",
+        year: config.year,
+        videoUrl: config.videoUrl,
+        spotifyArtistId: config.spotifyArtistId,
+    };
+  }
+
+  if (!config.spotifyUrl) return null;
+
   try {
     const oembedUrl = `https://open.spotify.com/oembed?url=${encodeURIComponent(config.spotifyUrl)}`;
     const response = await fetch(oembedUrl, { next: { revalidate: 86400 } });
@@ -44,6 +62,8 @@ export async function fetchRelease(config: ReleaseConfig): Promise<Release | nul
       hyperfollow: config.hyperfollow || config.spotifyUrl,
       type: config.type || autoType,
       year: config.year,
+      videoUrl: config.videoUrl,
+      spotifyArtistId: config.spotifyArtistId,
     };
   } catch (error) {
     console.error('Failed to fetch Spotify oEmbed:', error);

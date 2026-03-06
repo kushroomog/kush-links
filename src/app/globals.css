@@ -20,6 +20,11 @@ body {
 }
 
 @layer utilities {
+  .bg-dots {
+    background-image: radial-gradient(rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  
   .animate-float {
     animation: float 20s ease-in-out infinite;
   }

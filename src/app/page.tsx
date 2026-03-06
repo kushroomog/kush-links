@@ -1,13 +1,13 @@
 import Image from "next/image";
-import { Card, FeaturedReleaseCard, ReleaseListItem, SocialLink, DiscIcon, LinkIcon, EditorialCard, NewspaperIcon, EmailLink } from "@/components";
-import { socials, releases as releaseConfigs, editorial } from "@/data/links";
+import { Card, FeaturedReleaseCard, ReleaseListItem, SocialLink, DiscIcon, LinkIcon, EditorialCard, NewspaperIcon, EmailLink, ArrowRightIcon } from "@/components";
+import { socials, releases as releaseConfigs, editorial, artists } from "@/data/links";
 import { fetchAllReleases } from "@/lib/spotify";
 
 export default async function Home() {
   const releases = await fetchAllReleases(releaseConfigs);
 
   return (
-    <main className="min-h-screen bg-zinc-950 flex justify-center px-4 py-8 relative overflow-hidden">
+    <main className="min-h-screen flex justify-center px-4 py-8 relative overflow-hidden">
       {/* Background Effect */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 rounded-full blur-[120px] animate-float" />
@@ -25,12 +25,12 @@ export default async function Home() {
                 alt="Kushroom"
                 width={112}
                 height={112}
-                className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500"
+                className="w-full h-full object-cover hover:scale-105 transition-all duration-500"
                 priority
               />
             </div>
           </div>
-          <h1 className="text-4xl font-black text-white mb-3 tracking-tighter uppercase italic">kushroom.wav</h1>
+          <h1 className="text-4xl font-black text-white mb-3 tracking-tighter uppercase italic">kushroom.links</h1>
           <div className="space-y-1 mb-6">
             <p className="text-emerald-500 text-xs font-bold uppercase tracking-[0.2em]">Gravadora Independente de Música Urbana</p>
             <p className="text-zinc-500 text-[10px] font-medium uppercase tracking-[0.1em]">São Paulo, Brasil</p>
@@ -95,6 +95,86 @@ export default async function Home() {
             </Card>
           </div>
         )}
+
+        {/* Collaborators Section */}
+        <div className="mb-6">
+          <Card 
+            title="Nossa Equipe" 
+            icon={<LinkIcon className="w-4 h-4" />}
+            className="animate-fade-in-up animate-stagger-5"
+          >
+            <div className="space-y-3">
+              {artists.filter(a => a.type === 'person').map((artist, index) => (
+                <a
+                  key={index}
+                  href={`/${artist.id}`}
+                  className="flex items-center gap-4 px-5 py-4 bg-zinc-950/50 rounded-xl transition-all duration-300 hover:bg-zinc-900 border border-zinc-900/50 hover:border-emerald-500/20 group"
+                >
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-zinc-800 group-hover:border-emerald-500/30 transition-all flex-shrink-0">
+                    <Image
+                      src={artist.imageUrl}
+                      alt={artist.name}
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-cover transition-all"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="block text-[11px] font-black text-zinc-300 group-hover:text-white uppercase tracking-widest transition-colors truncate">
+                        {artist.name}
+                    </span>
+                    <span className="block text-[9px] font-bold text-emerald-500/60 group-hover:text-emerald-500 uppercase tracking-tight transition-colors truncate">
+                        {artist.role}
+                    </span>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center transition-all group-hover:bg-emerald-500/10 group-hover:border-emerald-500/20">
+                    <ArrowRightIcon className="w-3 h-3 text-zinc-600 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </Card>
+        </div>
+
+        {/* Ecosystem Section */}
+        <div className="mb-6">
+          <Card 
+            title="Ecossistema" 
+            icon={<LinkIcon className="w-4 h-4" />}
+            className="animate-fade-in-up [animation-delay:600ms]"
+          >
+            <div className="space-y-3">
+              {artists.filter(a => a.type === 'entity').map((artist, index) => (
+                <a
+                  key={index}
+                  href={`/${artist.id}`}
+                  className="flex items-center gap-4 px-5 py-4 bg-zinc-950/50 rounded-xl transition-all duration-300 hover:bg-zinc-900 border border-zinc-900/50 hover:border-emerald-500/20 group"
+                >
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-zinc-800 group-hover:border-emerald-500/30 transition-all flex-shrink-0">
+                    <Image
+                      src={artist.imageUrl}
+                      alt={artist.name}
+                      width={40}
+                      height={40}
+                      className="w-full h-full object-cover transition-all"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="block text-[11px] font-black text-zinc-300 group-hover:text-white uppercase tracking-widest transition-colors truncate">
+                        {artist.name}
+                    </span>
+                    <span className="block text-[9px] font-bold text-emerald-500/60 group-hover:text-emerald-500 uppercase tracking-tight transition-colors truncate">
+                        {artist.role}
+                    </span>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center transition-all group-hover:bg-emerald-500/10 group-hover:border-emerald-500/20">
+                    <ArrowRightIcon className="w-3 h-3 text-zinc-600 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </Card>
+        </div>
 
         {/* Footer */}
         <footer className="text-center py-12 border-t border-zinc-900 mt-8">
