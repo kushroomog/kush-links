@@ -35,7 +35,6 @@ export default async function ArtistPage({ params }: PageProps) {
   const mainReleases = artist.releases ? await fetchAllReleases(artist.releases) : [];
   const coAuthoredReleases = artist.coAuthoredReleases ? await fetchAllReleases(artist.coAuthoredReleases) : [];
 
-  const otherPeople = artists.filter(a => a.type === 'person' && a.id !== slug);
   const otherEntities = artists.filter(a => a.type === 'entity' && a.id !== slug);
 
   return (
@@ -154,50 +153,8 @@ export default async function ArtistPage({ params }: PageProps) {
           </div>
         )}
 
-        {/* Navigation - Other People */}
-        {otherPeople.length > 0 && (
-            <div className="mb-6">
-                <Card 
-                    title="Outros Artistas" 
-                    icon={<LinkIcon className="w-4 h-4" />}
-                    className="animate-fade-in-up"
-                >
-                    <div className="space-y-3">
-                        {otherPeople.map((other, index) => (
-                            <a
-                                key={index}
-                                href={`/${other.id}`}
-                                className="flex items-center gap-4 px-5 py-4 bg-zinc-950/50 rounded-xl transition-all duration-300 hover:bg-zinc-900 border border-zinc-900/50 hover:border-emerald-500/20 group"
-                            >
-                                <div className="w-10 h-10 rounded-full overflow-hidden border border-zinc-800 group-hover:border-emerald-500/30 transition-all flex-shrink-0">
-                                    <Image
-                                        src={other.imageUrl}
-                                        alt={other.name}
-                                        width={40}
-                                        height={40}
-                                        className="w-full h-full object-cover transition-all"
-                                    />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                    <span className="block text-[11px] font-black text-zinc-300 group-hover:text-white uppercase tracking-widest transition-colors truncate">
-                                        {other.name}
-                                    </span>
-                                    <span className="block text-[9px] font-bold text-emerald-500/60 group-hover:text-emerald-500 uppercase tracking-tight transition-colors truncate">
-                                        {other.role}
-                                    </span>
-                                </div>
-                                <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center transition-all group-hover:bg-emerald-500/10 group-hover:border-emerald-500/20">
-                                    <ArrowRightIcon className="w-3 h-3 text-zinc-600 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all" />
-                                </div>
-                            </a>
-                        ))}
-                    </div>
-                </Card>
-            </div>
-        )}
-
-        {/* Navigation - Other Entities */}
-        {otherEntities.length > 0 && (
+        {/* Navigation - Ecossistema (ONLY for entity pages) */}
+        {artist.type === 'entity' && (
             <div className="mb-6">
                 <Card 
                     title="Ecossistema" 
@@ -205,6 +162,32 @@ export default async function ArtistPage({ params }: PageProps) {
                     className="animate-fade-in-up"
                 >
                     <div className="space-y-3">
+                        <a
+                            href="/"
+                            className="flex items-center gap-4 px-5 py-4 bg-zinc-950/50 rounded-xl transition-all duration-300 hover:bg-zinc-900 border border-zinc-900/50 hover:border-emerald-500/20 group"
+                        >
+                            <div className="w-10 h-10 rounded-full overflow-hidden border border-zinc-800 group-hover:border-emerald-500/30 transition-all flex-shrink-0">
+                                <Image
+                                    src="/kush-logo.jpeg"
+                                    alt="Kushroom.wav"
+                                    width={40}
+                                    height={40}
+                                    className="w-full h-full object-cover transition-all"
+                                />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                                <span className="block text-[11px] font-black text-zinc-300 group-hover:text-white uppercase tracking-widest transition-colors truncate">
+                                    Kushroom.wav
+                                </span>
+                                <span className="block text-[9px] font-bold text-emerald-500/60 group-hover:text-emerald-500 uppercase tracking-tight transition-colors truncate">
+                                    Gravadora Independente
+                                </span>
+                            </div>
+                            <div className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center transition-all group-hover:bg-emerald-500/10 group-hover:border-emerald-500/20">
+                                <ArrowRightIcon className="w-3 h-3 text-zinc-600 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all" />
+                            </div>
+                        </a>
+                        
                         {otherEntities.map((other, index) => (
                             <a
                                 key={index}
