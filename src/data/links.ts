@@ -137,7 +137,7 @@ export const artists: Artist[] = [
     name: "Mossato",
     role: "Produtor • 3D • Audiovisual",
     type: "person",
-    bio: "Engenheiro de mix e master da Kushroom, moldando o punch e a identidade sonora de todos os projetos do SMITH-I. Especialista em 3D e audiovisual.",
+    bio: "Engenheiro de mix e master, moldando o punch e a identidade sonora de todos os projetos da Kushroom. Especialista em 3D e audiovisual.",
     imageUrl: "/mossato.jpg",
     instagram: "mossato1400",
     spotifyArtistId: "2TWnRDDuauLetwhxZV2mEb",
